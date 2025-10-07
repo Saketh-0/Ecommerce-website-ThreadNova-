@@ -9,10 +9,9 @@ ThreadNova is a modern e-commerce web application built using Next.js (React + T
 - Product listing and detail pages  
 - Shopping cart functionality  
 - User authentication / registration  
-- Admin dashboard (optional)  
 - Responsive design  
-- Backend API integration (REST / GraphQL)  
-- Deployment-ready (Vercel, Netlify, etc.)
+- Backend API integration (REST)  
+- Deployment-ready (Vercel)
 
 ---
 
