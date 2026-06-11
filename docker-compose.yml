@@ -1,0 +1,17 @@
+version: '3.8'
+
+services:
+  web:
+    container_name: threadnova-store
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    env_file:
+      - .env
+    environment:
+      - NODE_ENV=production
+      - PORT=3000
+      - HOSTNAME=0.0.0.0
+    restart: always

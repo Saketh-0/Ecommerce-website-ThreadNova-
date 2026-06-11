@@ -1,90 +1,118 @@
-# 🛍️ ThreadNova — Full-Stack E-Commerce Platform
+# ThreadNova — Premium E-Commerce Platform
 
-![Next.js](https://img.shields.io/badge/Next.js-000000?style=flat&logo=next.js&logoColor=white)
-![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=flat&logo=typescript&logoColor=white)
-![PostgreSQL](https://img.shields.io/badge/PostgreSQL-4169E1?style=flat&logo=postgresql&logoColor=white)
-![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=flat&logo=tailwind-css&logoColor=white)
-
-> A production-grade, server-side rendered e-commerce platform built from scratch with a focus on performance, scalability, and a modern developer experience.
+ThreadNova is a state-of-the-art, feature-rich Next.js 15 e-commerce platform built as a portfolio-ready demonstration. It incorporates fluid interactive animations, a custom REST API catalog, structured customer & admin checkout workflows, secure cookie-based session management, and Stripe checkout simulation.
 
 ---
 
-## ✨ Features
+## 🌟 Key Features
 
-- 🛒 Full shopping experience: product listing, cart, checkout
-- 🔍 Advanced search and filtering with real-time results
-- 📊 Admin dashboard: manage products, users, orders
-- ⭐ Customer reviews and ratings system
-- 🔐 Authentication and session management
-- 📱 Fully responsive, mobile-first UI
+### 1. Modern & High-Performance UI/UX
+- **GSAP Scroll Trigger Animations**: Elements slide and fade elegantly as you scroll down the page.
+- **GSAP Hero Carousel**: Stunning entrance animations and text staggers on banner changes.
+- **Dynamic Theme Selector**: Premium appearance toggle card with custom icon highlights and smooth indicator borders.
+- **Glassmorphism Mobile Menu**: Frosted-glass mobile sidebar menu with quick navigation links and custom user-details card.
+
+### 2. Full-Featured E-Commerce Engine
+- **Search & Advanced Filtering**: Filter items by query search, category, price ranges, customer ratings, and sort sorting criteria.
+- **Cart System**: Live persistent cart tracking quantity additions, subtractions, and calculations (shipping, tax, total).
+- **Multi-Step Checkout**: Integrated address management and payment method selections.
+- **Order Tracking**: Order details tracking delivery status, payment success verification, and transaction identifiers.
+- **Admin Dashboard**: Comprehensive manager statistics (total sales, user counts, products count, recent orders list) and action tools to toggle paid/delivered indicators.
+
+### 3. REST API Routes
+- `GET /api/products`: Queries products with support for filter strings, sorting, and pagination parameters.
+- `GET /api/products/[slug]`: Retrieves details of a specific product by its slug.
+
+### 4. Robust Security & Encryption
+- **Bcrypt Hashing**: User passwords are encrypted on sign-up using `bcryptjs` (salt factor 10) before saving in database.
+- **JWT Authentication**: Secure sessions via digitally signed JSON Web Tokens stored in HTTP-Only, Lax, and Secure cookies.
+
+### 5. Stripe Integration with Mock Fallback
+- **Stripe Checkout**: Redirects customers to Stripe's hosted secure payment page.
+- **Signature verification**: Stripe webhook handler constructs events safely with webhook secret signature checks.
+- **Simulated Payment Mode**: Redirects to a simulated successful check-out if Stripe credentials are not configured in `.env`.
 
 ---
 
-## 🏗️ Architecture
+## 🛠️ Tech Stack
 
+- **Framework**: Next.js 15.3 (App Router & React 19)
+- **Styling**: Tailwind CSS & Framer/Shadcn UI
+- **Database**: Neon Serverless Postgres (Prisma ORM)
+- **Animations**: GSAP (GreenSock Animation Platform)
+- **Token / Sessions**: JsonWebToken (JWT) & HTTP Cookies
+- **Payments**: Stripe Checkout
+
+---
+
+## 🚀 Getting Started
+
+### 1. Prerequisites
+Ensure you have Node.js installed on your machine.
+
+### 2. Configure Environment Variables
+Create a `.env` file in the root of the project:
+```env
+DATABASE_URL="your-postgresql-database-connection-string"
+JWT_SECRET="your-jwt-signing-secret"
+NEXT_PUBLIC_APP_URL="http://localhost:3000"
+
+# Optional Stripe Integration (fallback to simulated checkout if missing)
+STRIPE_SECRET_KEY="sk_test_..."
+STRIPE_WEBHOOK_SECRET="whsec_..."
 ```
-Next.js (SSR)
-├── Frontend (React + TypeScript + Tailwind CSS)
-│   ├── Product pages (SSR for SEO)
-│   ├── Admin dashboard
-│   └── Customer-facing storefront
-└── Backend (Next.js API routes)
-    ├── Prisma ORM → PostgreSQL
-    ├── Auth middleware
-    └── REST API endpoints
-```
 
----
-
-## 🗂️ Tech Stack
-
-| Layer | Technology |
-|-------|-----------|
-| Framework | Next.js (App Router, SSR) |
-| Language | TypeScript |
-| Styling | Tailwind CSS |
-| Database | PostgreSQL |
-| ORM | Prisma |
-| State | React Context / Hooks |
-
----
-
-## ⚡ Quick Start
-
-### 1. Clone & install
+### 3. Install Dependencies
 ```bash
-git clone https://github.com/Saketh-0/Ecommerce-website-ThreadNova-.git
-cd Ecommerce-website-ThreadNova-
 npm install
 ```
 
-### 2. Set up environment variables
+### 4. Push Database Schema
 ```bash
-cp .env.example .env
-# Add your DATABASE_URL and other config
+npx prisma db push
 ```
 
-### 3. Set up database
+### 5. Seed Database
+Populate database with 14 premium fashion products and demo login credentials:
 ```bash
-npx prisma migrate dev
-npx prisma db seed
+npx tsx db/seed.ts
 ```
 
-### 4. Run the dev server
+### 6. Run Local Development Server
 ```bash
 npm run dev
-# Open http://localhost:3000
 ```
 
----
-
-## 📚 Key Learnings
-
-- Server-side rendering strategies in Next.js for performance and SEO
-- Type-safe database access with Prisma and PostgreSQL
-- Building scalable admin systems with role-based access
-- Full-stack TypeScript development patterns
+Open [http://localhost:3000](http://localhost:3000) to view the live store.
 
 ---
 
-*Part of my full-stack portfolio — [View more projects](https://github.com/Saketh-0)*
+## 🔑 Demo Access
+
+For quick testing, use these pre-seeded accounts:
+
+| Role | Email | Password |
+|------|-------|----------|
+| **Admin** | `admin@threadnova.com` | `admin123` |
+| **Demo Customer** | `demo@threadnova.com` | `demo123` |
+
+---
+
+## 🐳 Running with Docker
+
+You can containerize the app using Docker Desktop.
+
+### Build and Run with Docker Compose
+Run the following command in the root directory:
+```bash
+docker compose up --build -d
+```
+This will:
+1. Build the multi-stage production Docker image.
+2. Read your variables from the `.env` file automatically.
+3. Expose the server on [http://localhost:3000](http://localhost:3000).
+
+To stop the container:
+```bash
+docker compose down
+```
