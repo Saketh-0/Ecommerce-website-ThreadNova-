@@ -2,6 +2,8 @@
 
 ThreadNova is a state-of-the-art, feature-rich Next.js 15 e-commerce platform built as a portfolio-ready demonstration. It incorporates fluid interactive animations, a custom REST API catalog, structured customer & admin checkout workflows, secure cookie-based session management, and Stripe checkout simulation.
 
+🚀 **Live Demo:** [ThreadNova E-Commerce Store](https://ecommerce-website-thread-nova.vercel.app)
+
 ---
 
 ## 🌟 Key Features
