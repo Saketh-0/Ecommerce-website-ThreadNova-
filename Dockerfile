@@ -7,6 +7,7 @@ RUN npm install --ignore-scripts
 
 # Stage 2: Build the source code
 FROM node:18-alpine AS builder
+RUN apk add --no-cache libc6-compat
 WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
@@ -15,6 +16,7 @@ RUN npm run build
 
 # Stage 3: Production runner
 FROM node:18-alpine AS runner
+RUN apk add --no-cache libc6-compat
 WORKDIR /app
 ENV NODE_ENV=production
 RUN addgroup --system --gid 1001 nodejs
